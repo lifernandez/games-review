@@ -1,2 +1,27 @@
-<h1>Games#index</h1>
-<p>Find me in app/views/games/index.html.erb</p>
+<div class="container">
+  <div class="cards">
+      <% @games.each_with_index do |game, i| %>
+        <%= link_to game_path(game), class:"text-decoration-none mt-4" do %>
+          <div class="card-trip">
+            <% if game.photos.first.nil? %>
+              <%= image_tag "hogwarts-castle.jpg", class: "card-image" %>
+            <% else %>
+              <%= cl_image_tag game.photos.first.key, class: "card-image" %>
+            <% end %>
+            <div class="card-trip-infos">
+              <div class="card-trip-infos-description">
+                <h2><%= game.title %></h2>
+                <p><%= game.description %></p>
+                <p><%= game.rating %></p>
+                <%# <% if game.rating != [] %>
+                <%#p class="card-trip-rating"> <i class="fa-solid fa-star"></i><%= (game.rating.map(&:rating).sum)/game.rating.length %>
+                <%# end %>
+              </div>
+              <h2 class="card-trip-pricing">
+              <%# £<%= game.price %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+  </div>
+</div>
